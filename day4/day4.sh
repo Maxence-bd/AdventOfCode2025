@@ -54,9 +54,6 @@ nbVoisin=0
 echo "nb Ligne $nbLigne  Nb colonne $nbColonne"
 compteur=0
 
-########################################
-# PARTIE 1 : nombre de rouleaux accessibles
-########################################
 for ((i=0; i<nbLigne; i++)); do
     for ((j=0; j<nbColonne; j++)); do
         val=$(compterVoisin "$i" "$j")
@@ -68,9 +65,6 @@ done
 
 echo "Partie 1 : $nbVoisin rouleaux accessibles"
 
-########################################
-# PARTIE 2 : simulation des retraits successifs
-########################################
 
 totalRemoved=0
 
@@ -78,7 +72,6 @@ while :; do
     roundRemoved=0
     to_remove=()
 
-    # 1) On repère tous les rouleaux accessibles *dans l'état actuel de la grille*
     for ((i=0; i<nbLigne; i++)); do
         for ((j=0; j<nbColonne; j++)); do
             char="${grid[$i]:$j:1}"
@@ -92,12 +85,10 @@ while :; do
         done
     done
 
-    # Si plus rien à retirer, on s'arrête
     if (( roundRemoved == 0 )); then
         break
     fi
 
-    # 2) On retire tous les rouleaux trouvés dans cette itération
     for coord in "${to_remove[@]}"; do
         I=${coord%%:*}
         J=${coord##*:}

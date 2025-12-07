@@ -39,9 +39,6 @@ partie2() {
         return 1
     fi
 
-    # 1. On extrait les ranges
-    # 2. On les trie numériquement sur la borne de début
-    # 3. On fusionne et on calcule la longueur totale
     total=$(
         grep '-' "$FILE" \
         | sort -n -t'-' -k1,1 \
